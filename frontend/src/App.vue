@@ -1,38 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js Apsp" />
-    <button @click="getData">Get Data</button>
+  <div>
+    <AnimeCard  
+      :title="animes.title"
+      :score="animes.score"
+      :image="animes.images?.jpg?.image_url"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AnimeCard from './components/AnimeCard.vue'
 export default {
-  name: 'App',
+  name : 'App',
   components: {
-    HelloWorld
+    AnimeCard
   },
-  methods: {
-    getData() {
-      fetch(`${process.env.VUE_APP_API_URL}/data`)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        });
+  data() {
+    return {
+      animes: []
     }
+  },
+  // Appel API pour récupérer les animes
+  created() {
+    fetch(`${process.env.VUE_APP_API_URL}/anime/konosuba`)
+      .then(response => response.json())
+      .then(data => {
+        this.animes = data;
+        console.log(this.animes.title)
+
+      })
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
