@@ -1,8 +1,10 @@
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import apiRoutes from './apiRoutes.js';
+
 const app = express();
 const port = 3000;
-const apiRoutes = require('./apiRoutes')
+
 
 app.use(cors()); // Ajoute le middleware CORS à votre application
 
